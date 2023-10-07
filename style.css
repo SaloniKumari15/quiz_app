@@ -9,15 +9,16 @@ body {
   top: 50%;
   left: 50%;
   text-align: center;
+  width: 450px;
   transform: translate(-50%, -50%);
-  background-color: #daacac;
+  background-color: #605c5c;
   padding: 20px;
   border-radius: 5px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: 2px solid #010910;
 }
 
 .login_box h2 {
-  font-size: 24px;
+  font-size: 28px;
   margin-bottom: 20px;
 }
 
@@ -57,17 +58,42 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+@media screen and (max-width: 768px) {
+  .login_box,
+  .result_box {
+    width: 90%;
+    max-width: 80%;
+  }
+}
+
+.login_box.fade-in,
+.quiz_box.fade-in,
+.result_box.fade-in {
+  animation: fade-in 0.5s ease-in-out;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 .quiz_box {
   position: absolute;
   display: none;
   top: 50%;
   left: 50%;
   width: 550px;
-  background-color: #fd8989;
-  padding: 20px;
+  padding: 10px;
+  background-color: #e46363;
   border-radius: 5px;
   transform: translate(-50%, -50%) scale(0.9);
   transition: all 0.3s ease;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .quiz_box header {
@@ -126,8 +152,8 @@ body {
   bottom: 0px;
   left: 0px;
   height: 3px;
-
   background: #007bff;
+  width: 0;
 }
 .quiz_box section {
   padding: 25px 30px 20px 30px;
@@ -178,11 +204,11 @@ section .option_list {
 
 .quiz_box footer {
   height: 60px;
-  padding: 0 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-top: 1px solid lightgrey;
+  margin-top: 10px;
 }
 
 .quiz_box footer .next_btn,
@@ -205,7 +231,25 @@ section .option_list {
   padding: 0 5px;
 }
 
-/* Style the result box */
+@media screen and (max-width: 768px) {
+  .quiz_box {
+    width: 90%;
+    max-width: 100%;
+  }
+  .quiz_box section .que_text {
+    font-size: 20px;
+  }
+  .quiz_box section .option_list .option {
+    font-size: 16px;
+  }
+  .quiz_box header {
+    padding: 3px;
+  }
+  .quiz_box header h2 {
+    font-size: 20px;
+    font-weight: 600;
+  }
+}
 .result_box {
   display: none;
   position: absolute;
@@ -214,15 +258,14 @@ section .option_list {
   width: 450px;
   transform: translate(-50%, -50%);
   text-align: center;
-  background-color: #c2beda;
-  padding: 20px;
+  background-color: #faebf6;
   border-radius: 5px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: 2px solid #004085;
 }
 
 .result_box .icon {
   font-size: 100px;
-  color: blueviolet;
+  color: rgb(245, 19, 19);
   margin-bottom: 10px;
 }
 
@@ -253,7 +296,6 @@ section .option_list {
   color: #007bff;
 }
 
-/* Style the restart and quit buttons in the result box */
 .result_box .buttons .restart {
   background-color: #007bff;
   color: #fff;

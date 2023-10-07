@@ -79,8 +79,8 @@ function showQuestions(index) {
   let que_tag = "<span>" + questions[index].numb + ". " + questions[index].question + "</span>";
 
   let optionTag = "";
-  for (let i = 0; i < questions[index].options.length; i++) {
-    optionTag += `<div class="option" onclick="optionSelected(this)"><span>${questions[index].options[i]}</span></div>`;
+  for (const element of questions[index].options) {
+    optionTag += `<div class="option" onclick="optionSelected(this)"><span>${element}</span></div>`;
   }
   questionText.innerHTML = que_tag;
   optionList.innerHTML = optionTag;
@@ -103,13 +103,13 @@ function startTimer(time) {
       timeText.textContent = "Time Out";
       const correctAnswer = questions[currentQuestionIndex].answer;
       const allOptions = optionList.children;
-      for (let i = 0; i < allOptions.length; i++) {
-        if (allOptions[i].textContent === correctAnswer) {
-          allOptions[i].classList.add("correct");
+      for (const element of allOptions) {
+        if (element.textContent === correctAnswer) {
+          element.classList.add("correct");
         }
       }
-      for (let i = 0; i < allOptions.length; i++) {
-        allOptions[i].classList.add("disabled");
+      for (const element of allOptions) {
+        element.classList.add("disabled");
       }
 
       nextBtn.style.display = "block";
@@ -123,10 +123,11 @@ function startTimer(time) {
  */
 
 function startTimerLine(time) {
+  const totalTime = 15 * 1000;
   counterLine = setInterval(() => {
-    time += 1;
-    time_line.style.width = time + "px";
-    if (time > 549) {
+    time += 29;
+    time_line.style.width = (time / totalTime) * 100 + "%";
+    if (time >= totalTime) {
       clearInterval(counterLine);
     }
   }, 29);
@@ -147,14 +148,14 @@ function optionSelected(answer) {
     userScore += 1;
   } else {
     answer.classList.add("incorrect");
-    for (let i = 0; i < allOptions.length; i++) {
-      if (allOptions[i].textContent === correctAnswer) {
-        allOptions[i].classList.add("correct");
+    for (const element of allOptions) {
+      if (element.textContent === correctAnswer) {
+        element.classList.add("correct");
       }
     }
   }
-  for (let i = 0; i < allOptions.length; i++) {
-    allOptions[i].classList.add("disabled");
+  for (const element of allOptions) {
+    element.classList.add("disabled");
   }
   nextBtn.style.display = "block";
 }
@@ -167,6 +168,8 @@ function nextQuestion() {
     currentQuestionIndex++;
     que_numb++;
     showQuestions(currentQuestionIndex);
+
+    time_line.style.width = "0";
     clearInterval(counter);
     clearInterval(counterLine);
     startTimer(timeValue);
